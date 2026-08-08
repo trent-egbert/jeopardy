@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Diamond, Flourish } from './Ornaments.jsx'
 
-export default function ClueModal({ category, clue, teams, onScore, onClose }) {
+export default function ClueModal({ category, clue, teams, onScore, onClose, onDismiss }) {
   const [revealed, setRevealed] = useState(false)
   const panelRef = useRef(null)
 
@@ -39,6 +39,19 @@ export default function ClueModal({ category, clue, teams, onScore, onClose }) {
         tabIndex={-1}
         onClick={() => setRevealed(true)}
       >
+        <button
+          type="button"
+          className="dismiss-button"
+          title="Close without marking this square as played"
+          aria-label="Close without marking this square as played"
+          onClick={(event) => {
+            event.stopPropagation()
+            onDismiss()
+          }}
+        >
+          ✕
+        </button>
+
         <header className="clue-header">
           <Diamond className="clue-diamond" />
           <div>
@@ -99,7 +112,10 @@ export default function ClueModal({ category, clue, teams, onScore, onClose }) {
           Back to Board
         </button>
 
-        <p className="clue-hint">Space reveals the answer, then returns to the board · Esc closes</p>
+        <p className="clue-hint">
+          Space reveals the answer, then returns to the board · Esc closes ·
+          ✕ closes without marking the square played
+        </p>
       </div>
     </div>
   )

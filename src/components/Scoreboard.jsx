@@ -6,12 +6,20 @@ export default function Scoreboard({ teams, onRename, onScore, onAddTeam, onRemo
       <div className="scoreboard-teams">
         {teams.map((team) => (
           <div className="team-card" key={team.id}>
-            <input
-              className="team-name"
-              value={team.name}
-              onChange={(event) => onRename(team.id, event.target.value)}
-              aria-label="Team name"
-            />
+            <label className="team-name-field">
+              <span className="team-name-pencil" aria-hidden="true">
+                ✎
+              </span>
+              <input
+                className="team-name"
+                value={team.name}
+                placeholder="Team name"
+                title="Click to rename this team"
+                onChange={(event) => onRename(team.id, event.target.value)}
+                onFocus={(event) => event.target.select()}
+                aria-label="Team name"
+              />
+            </label>
             <p className="team-score">{team.score}</p>
             <div className="team-controls">
               <button type="button" onClick={() => onScore(team.id, -100)} aria-label={`Subtract 100 from ${team.name}`}>

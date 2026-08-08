@@ -395,6 +395,36 @@ button {
   gap: 0.25rem;
 }
 
+/* The name is a text field — the pencil and hover fill say so out loud. */
+.team-name-field {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid transparent;
+  border-bottom-color: var(--gold);
+  border-radius: 8px;
+  cursor: text;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.team-name-field:hover {
+  background: #fbf6ea;
+  border-color: var(--gold);
+}
+
+.team-name-field:focus-within {
+  background: #fbf6ea;
+  border-color: var(--green);
+}
+
+.team-name-pencil {
+  font-size: 0.75rem;
+  color: var(--gold);
+  flex: 0 0 auto;
+}
+
 .team-name {
   font-family: var(--display);
   font-size: 0.95rem;
@@ -402,14 +432,13 @@ button {
   color: var(--green);
   background: transparent;
   border: none;
-  border-bottom: 1px dotted var(--gold);
   width: 100%;
+  min-width: 0;
   padding: 0.15rem 0;
 }
 
 .team-name:focus {
   outline: none;
-  border-bottom-color: var(--green);
 }
 
 .team-score {
@@ -465,6 +494,7 @@ button {
 }
 
 .clue-panel {
+  position: relative;
   width: min(1000px, 100%);
   max-height: 100%;
   overflow-y: auto;
@@ -624,4 +654,30 @@ button {
   .footer-heart {
     display: none;
   }
+}
+
+/* ---------- Dismiss (close without marking played) ---------- */
+
+.dismiss-button {
+  position: absolute;
+  top: clamp(0.6rem, 1.5vw, 1rem);
+  right: clamp(0.6rem, 1.5vw, 1rem);
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--green);
+  background: var(--paper);
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.dismiss-button:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--cream);
 }

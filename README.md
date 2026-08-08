@@ -29,9 +29,12 @@ npm run preview
   show the answer.
 - **`Space` again** (or **Back to Board** / `Esc`) returns to the board. The
   square you played is marked with a ✦ so you can see what's left.
+- **✕ in the corner of the clue** closes it *without* marking the square
+  played — for when you open the wrong square. Opening an already-played
+  square and closing with ✕ also clears its ✦, so it doubles as an undo.
 - **Award points** right from the clue with the `+`/`−` buttons for each team.
-- **Team names are editable** — click the name on a scorecard and type.
-  **Add Team** adds another; **✕** removes one.
+- **Team names are editable** — click a name on a scorecard and type.
+  **Add Team** adds another; **✕** on the card removes one.
 - **Reset Game** clears every played square and zeroes the scores.
 
 Played squares and scores are saved in the browser, so an accidental refresh

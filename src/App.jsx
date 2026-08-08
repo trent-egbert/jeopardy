@@ -46,6 +46,20 @@ export default function App() {
     setUsedClues((previous) => new Set(previous).add(`${categoryId}:${value}`))
   }, [])
 
+  // Closing with the ✕ backs out of a square opened by mistake, so the tile
+  // goes back to unplayed rather than staying marked.
+  const dismissClue = useCallback(() => {
+    if (activeClue) {
+      const key = `${activeClue.categoryId}:${activeClue.value}`
+      setUsedClues((previous) => {
+        const next = new Set(previous)
+        next.delete(key)
+        return next
+      })
+    }
+    setActiveClue(null)
+  }, [activeClue])
+
   const scoreTeam = useCallback((teamId, delta) => {
     setTeams((previous) =>
       previous.map((team) =>
@@ -136,6 +150,7 @@ export default function App() {
           teams={teams}
           onScore={scoreTeam}
           onClose={() => setActiveClue(null)}
+          onDismiss={dismissClue}
         />
       )}
     </div>
