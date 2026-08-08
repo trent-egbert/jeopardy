@@ -1,0 +1,627 @@
+:root {
+  --cream: #fdfaf3;
+  --paper: #ffffff;
+  --green: #1c3b34;
+  --green-soft: #2f5a4e;
+  --red: #a4152b;
+  --red-soft: #c23146;
+  --gold: #c8922e;
+  --gold-soft: #e0b463;
+  --display: 'Cinzel', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --body: 'EB Garamond', Georgia, 'Times New Roman', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--green);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.page {
+  height: 100dvh;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: clamp(0.5rem, 1.4vh, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.5rem, 1.2vh, 1rem);
+  background:
+    radial-gradient(circle at 50% 0%, #ffffff 0%, var(--cream) 55%, #f6f0e4 100%);
+}
+
+/* ---------- Ornaments ---------- */
+
+.ornament {
+  display: block;
+  color: var(--gold);
+}
+
+.ornament .star {
+  fill: var(--gold);
+}
+
+.crown {
+  width: clamp(38px, min(5vw, 5vh), 84px);
+  height: auto;
+  margin: 0 auto;
+}
+
+.crown .heart {
+  fill: var(--red);
+}
+
+.diamond {
+  width: 0.85em;
+  height: 1.3em;
+  color: var(--red);
+}
+
+.tone-green .diamond {
+  color: var(--green);
+}
+
+.sprig {
+  width: 100%;
+  max-width: 130px;
+  height: auto;
+  color: var(--green);
+  opacity: 0.85;
+}
+
+.flourish {
+  width: min(300px, 55%);
+  height: auto;
+  color: var(--green);
+  opacity: 0.85;
+}
+
+.heart-icon {
+  width: 1.1em;
+  height: 1.1em;
+  fill: var(--red);
+}
+
+/* ---------- Frame ---------- */
+
+.frame {
+  width: min(1180px, 100%);
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 4px solid var(--green);
+  border-radius: 44px;
+  padding: clamp(0.75rem, 1.8vh, 1.75rem) clamp(0.75rem, 2vw, 1.75rem);
+  position: relative;
+  box-shadow: 0 18px 40px rgba(28, 59, 52, 0.12);
+}
+
+.frame::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 2px solid var(--gold);
+  border-radius: 34px;
+  pointer-events: none;
+}
+
+/* ---------- Masthead ---------- */
+
+.masthead {
+  text-align: center;
+  margin-bottom: clamp(0.4rem, 1.1vh, 1rem);
+}
+
+.title {
+  margin: 0.2rem 0 0;
+  font-family: var(--display);
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+}
+
+.title span {
+  display: block;
+}
+
+.title-jeopardy {
+  color: var(--red);
+  font-size: clamp(1.7rem, min(5.5vw, 6.4vh), 4.4rem);
+  font-weight: 700;
+  text-shadow: 2px 2px 0 rgba(164, 21, 43, 0.14);
+}
+
+.title-board {
+  color: var(--green);
+  font-size: clamp(1.15rem, min(3.6vw, 4.2vh), 2.8rem);
+  font-weight: 600;
+  margin-top: 0.15em;
+}
+
+.subtitle {
+  margin: clamp(0.35rem, 0.9vh, 0.7rem) 0 0;
+  font-family: var(--display);
+  font-size: clamp(0.68rem, min(1.4vw, 1.9vh), 1.1rem);
+  letter-spacing: 0.12em;
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9em;
+}
+
+.subtitle-star {
+  color: var(--gold);
+}
+
+/* ---------- Board ---------- */
+
+.board {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(0.35rem, 0.8vw, 0.75rem);
+}
+
+.board-column {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto repeat(5, minmax(0, 1fr));
+  gap: clamp(0.35rem, 0.8vw, 0.75rem);
+}
+
+.category-card,
+.value-tile {
+  background: var(--paper);
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  position: relative;
+  padding: clamp(0.4rem, 1vw, 0.7rem) 0.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.category-card::after,
+.value-tile::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px dotted var(--gold-soft);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.category-card {
+  min-height: clamp(48px, 7vh, 96px);
+}
+
+.category-name {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(0.68rem, min(1.45vw, 2.1vh), 1.1rem);
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--red);
+}
+
+.tone-green .category-name {
+  color: var(--green);
+}
+
+.category-ornament {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-diamond {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ---------- Value tiles ---------- */
+
+.value-tile {
+  min-height: 0;
+  overflow: hidden;
+  container-type: size;
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+}
+
+.value-tile:hover:not(.is-used) {
+  transform: translateY(-2px);
+  background: #fffdf7;
+  box-shadow: 0 8px 18px rgba(28, 59, 52, 0.14);
+}
+
+.value-tile:focus-visible {
+  outline: 3px solid var(--green-soft);
+  outline-offset: 3px;
+}
+
+.value-number {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1rem, min(2.7vw, 4.4vh), 2.6rem);
+  line-height: 1;
+  color: var(--red);
+}
+
+.tone-green .value-number {
+  color: var(--green);
+}
+
+/* The sprig is the first thing to go when a tile gets short. */
+.tile-sprig {
+  display: none;
+  flex: 0 0 auto;
+  max-width: 62%;
+  height: clamp(9px, 1.6vh, 16px);
+}
+
+@container (min-height: 66px) {
+  .tile-sprig {
+    display: block;
+  }
+}
+
+.used-mark {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  color: var(--gold);
+}
+
+.value-tile.is-used {
+  background: #f4efe3;
+  border-color: #ded2b8;
+}
+
+.value-tile.is-used .value-number,
+.value-tile.is-used .tile-sprig {
+  opacity: 0.16;
+}
+
+.value-tile.is-used .used-mark {
+  display: flex;
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  margin-top: clamp(0.4rem, 1vh, 1rem);
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.footer-note {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(0.7rem, 1.2vw, 0.95rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 0.35rem 1.4rem;
+}
+
+/* ---------- Controls & scoreboard ---------- */
+
+.controls {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.controls button,
+.team-controls button,
+.add-team,
+.reveal-button,
+.close-button,
+.award-buttons button {
+  font-family: var(--display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--green);
+  background: var(--paper);
+  border: 2px solid var(--gold);
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.controls button:hover,
+.team-controls button:hover,
+.add-team:hover,
+.reveal-button:hover,
+.close-button:hover,
+.award-buttons button:hover {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--cream);
+}
+
+.scoreboard {
+  width: min(1180px, 100%);
+}
+
+.scoreboard-teams {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.team-card {
+  background: var(--paper);
+  border: 2px solid var(--green);
+  border-radius: 16px;
+  padding: 0.35rem 0.8rem;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.team-name {
+  font-family: var(--display);
+  font-size: 0.95rem;
+  text-align: center;
+  color: var(--green);
+  background: transparent;
+  border: none;
+  border-bottom: 1px dotted var(--gold);
+  width: 100%;
+  padding: 0.15rem 0;
+}
+
+.team-name:focus {
+  outline: none;
+  border-bottom-color: var(--green);
+}
+
+.team-score {
+  margin: 0.1rem 0;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 3vh, 1.9rem);
+  color: var(--red);
+}
+
+.team-controls {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.team-controls button {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.68rem;
+}
+
+.team-remove {
+  border-color: var(--red) !important;
+  color: var(--red) !important;
+}
+
+.team-remove:hover {
+  background: var(--red) !important;
+  color: var(--cream) !important;
+}
+
+.add-team {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  align-self: center;
+}
+
+.add-team:hover .heart-icon {
+  fill: var(--cream);
+}
+
+/* ---------- Clue overlay ---------- */
+
+.clue-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 59, 52, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 3vw, 2.5rem);
+  z-index: 10;
+}
+
+.clue-panel {
+  width: min(1000px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  background: var(--paper);
+  border: 4px solid var(--green);
+  border-radius: 32px;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.6rem, 1.5vw, 1.1rem);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+}
+
+.clue-panel:focus {
+  outline: none;
+}
+
+.clue-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.clue-diamond {
+  width: 1.1rem;
+  height: 1.7rem;
+  color: var(--gold);
+}
+
+.clue-category {
+  margin: 0;
+  font-family: var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: clamp(0.9rem, 2vw, 1.4rem);
+  color: var(--green);
+}
+
+.clue-value {
+  margin: 0.1rem 0 0;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  color: var(--red);
+}
+
+.clue-flourish {
+  width: min(320px, 60%);
+}
+
+.clue-text {
+  margin: 0.4rem 0;
+  font-size: clamp(1.3rem, 3.4vw, 2.5rem);
+  line-height: 1.35;
+  color: var(--green);
+  max-width: 44ch;
+}
+
+.answer-block {
+  border-top: 2px dotted var(--gold);
+  padding-top: clamp(0.6rem, 1.5vw, 1rem);
+  width: 100%;
+}
+
+.answer-label {
+  margin: 0 0 0.3rem;
+  font-family: var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+  color: var(--gold);
+}
+
+.answer-text {
+  margin: 0;
+  font-size: clamp(1.2rem, 3vw, 2.1rem);
+  line-height: 1.35;
+  color: var(--red);
+  font-weight: 600;
+}
+
+.award-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.award-team {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 0.25rem 0.35rem 0.25rem 0.85rem;
+}
+
+.award-name {
+  font-family: var(--display);
+  font-size: 0.85rem;
+  color: var(--green);
+}
+
+.award-buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.award-buttons button {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.7rem;
+}
+
+.clue-hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--green-soft);
+  opacity: 0.75;
+}
+
+@media (max-width: 640px) {
+  .category-name {
+    font-size: 0.62rem;
+  }
+
+  .tile-sprig,
+  .category-ornament {
+    display: none;
+  }
+}
+
+/* Below the fold is fine on small screens — let the page scroll instead. */
+@media (max-width: 900px), (max-height: 560px) {
+  .page {
+    height: auto;
+    overflow: visible;
+  }
+}
+
+/* Short screens: drop the decorative footer band so the tiles keep their height. */
+@media (max-height: 900px) {
+  .footer {
+    gap: 0.2rem;
+  }
+
+  .footer .flourish {
+    display: none;
+  }
+
+  .footer-note {
+    padding: 0.2rem 1rem;
+    font-size: 0.7rem;
+  }
+
+  .footer-heart {
+    display: none;
+  }
+}
