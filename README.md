@@ -77,6 +77,30 @@ edited. A browser that already has edits keeps showing them until you restore.
 }
 ```
 
+## Hosting it on Vercel
+
+The app is a static site — no server, no database — so Vercel needs nothing
+but the repo. [`vercel.json`](vercel.json) pins the settings (Vite, `npm run
+build`, output in `dist`) so the dashboard doesn't have to guess.
+
+1. Go to [vercel.com/new](https://vercel.com/new) and import
+   `trent-egbert/jeopardy`. Vercel will ask for access to the repo the first
+   time.
+2. Leave every build setting alone — `vercel.json` already sets them — and
+   click **Deploy**.
+3. Under **Settings → Git**, check that **Production Branch** matches the
+   branch you want live.
+
+After that, every push to the production branch redeploys automatically. Open
+the URL on the laptop that's driving the projector; nothing needs installing.
+
+One thing to know: edits made in **Edit Board** live in *that browser's* local
+storage, not on the server. Editing the board on your phone won't change what
+the church laptop sees. To move a board between devices, use **Download
+Board** on one and **Load Board File** on the other — or edit
+`src/data/gameData.js` and push, which changes the board for every device that
+hasn't been edited locally.
+
 ## Built with
 
 React 19 + Vite, with plain CSS (no framework) for the vintage board styling.

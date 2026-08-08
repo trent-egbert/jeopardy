@@ -7,4 +7,10 @@ export default defineConfig({
     port: 5173,
     open: true,
   },
+  // `preview` inherits server options otherwise, and auto-open fails on
+  // machines without a browser (CI, a build box).
+  preview: {
+    port: 4173,
+    open: false,
+  },
 })
