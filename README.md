@@ -42,9 +42,29 @@ mid-lesson doesn't lose the game.
 
 ## Editing the clues
 
-All the content lives in [`src/data/gameData.js`](src/data/gameData.js) —
-category names, the five clues per category, and the title text. Edit the
-`clue` and `answer` strings; the board updates as soon as you save.
+### From the app — **Edit Board**
+
+Click **Edit Board** under the scoreboard. Pick a category tab, then edit its
+name and any of its five clues and answers. Changes apply to the board
+immediately and save to this browser as you type, so they survive a refresh
+and are still there next Sunday. There's no password — it's a button anyone at
+the laptop can press.
+
+The buttons along the bottom:
+
+- **Download Board** saves the whole board as `jeopardy-board.json`.
+- **Load Board File** reads one of those files back in — that's how you move a
+  board to another computer, or keep several lessons side by side. A file that
+  isn't a board export is rejected and leaves the current board alone.
+- **Restore Original** discards your edits and reloads the clues transcribed
+  from the printed cards.
+
+### From the code
+
+[`src/data/gameData.js`](src/data/gameData.js) holds the original clue cards —
+category names, five clues each, and the title text. Editing it changes what
+**Restore Original** restores to, and what a browser sees if it has never been
+edited. A browser that already has edits keeps showing them until you restore.
 
 ```js
 {

@@ -1,10 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import AdminPanel from './components/AdminPanel.jsx'
 import Board from './components/Board.jsx'
 import ClueModal from './components/ClueModal.jsx'
 import Scoreboard from './components/Scoreboard.jsx'
 import { Crown, Flourish, Heart } from './components/Ornaments.jsx'
 import {
-  categories,
+  clearSavedContent,
+  defaultContent,
+  loadContent,
+  saveContent,
+} from './content.js'
+import {
   DEFAULT_TEAMS,
   FOOTER_NOTE,
   GAME_SUBTITLE,
@@ -29,10 +35,12 @@ function loadState() {
 
 export default function App() {
   const [saved] = useState(loadState)
+  const [categories, setCategories] = useState(loadContent)
   const [usedClues, setUsedClues] = useState(() => new Set(saved?.usedClues ?? []))
   const [teams, setTeams] = useState(() => saved?.teams ?? DEFAULT_TEAMS)
   const [activeClue, setActiveClue] = useState(null)
   const [showScoreboard, setShowScoreboard] = useState(true)
+  const [editing, setEditing] = useState(false)
 
   useEffect(() => {
     localStorage.setItem(
@@ -40,6 +48,15 @@ export default function App() {
       JSON.stringify({ usedClues: [...usedClues], teams }),
     )
   }, [usedClues, teams])
+
+  useEffect(() => {
+    saveContent(categories)
+  }, [categories])
+
+  const restoreContent = useCallback(() => {
+    clearSavedContent()
+    setCategories(defaultContent())
+  }, [])
 
   const selectClue = useCallback((categoryId, value) => {
     setActiveClue({ categoryId, value })
@@ -97,7 +114,7 @@ export default function App() {
     const category = categories.find((item) => item.id === activeClue.categoryId)
     const clue = category?.clues.find((item) => item.value === activeClue.value)
     return category && clue ? { category, clue } : null
-  }, [activeClue])
+  }, [activeClue, categories])
 
   return (
     <div className="page">
@@ -131,6 +148,15 @@ export default function App() {
         <button type="button" onClick={resetGame}>
           Reset Game
         </button>
+        <button
+          type="button"
+          onClick={() => {
+            setActiveClue(null)
+            setEditing(true)
+          }}
+        >
+          Edit Board
+        </button>
       </div>
 
       {showScoreboard && (
@@ -151,6 +177,15 @@ export default function App() {
           onScore={scoreTeam}
           onClose={() => setActiveClue(null)}
           onDismiss={dismissClue}
+        />
+      )}
+
+      {editing && (
+        <AdminPanel
+          categories={categories}
+          onChange={setCategories}
+          onRestore={restoreContent}
+          onClose={() => setEditing(false)}
         />
       )}
     </div>
