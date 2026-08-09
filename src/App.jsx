@@ -12,7 +12,6 @@ import {
 } from './content.js'
 import {
   DEFAULT_TEAMS,
-  FOOTER_NOTE,
   GAME_SUBTITLE,
   TITLE_BOTTOM,
   TITLE_TOP,
@@ -136,7 +135,6 @@ export default function App() {
 
         <footer className="footer">
           <Flourish />
-          <p className="footer-note">{FOOTER_NOTE}</p>
           <Heart className="footer-heart" />
         </footer>
       </div>
