@@ -249,6 +249,7 @@ button {
   overflow: hidden;
   container-type: size;
   transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+  padding: 20px 0;
 }
 
 .value-tile:hover:not(.is-used) {
